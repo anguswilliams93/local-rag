@@ -1,0 +1,44 @@
+# Backend-specific ignores
+
+# Data directories - DO NOT COMMIT (contains user documents and vectors)
+data/
+
+# Python virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment variables (contains API keys)
+.env
+.env.local
+.env.*.local
+
+# Logs (keep directory, ignore log files)
+logs/*.log
+
+# SQLite database (optional - comment out if you want to keep it)
+# *.db
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
