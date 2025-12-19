@@ -5,11 +5,13 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { agentApi, Agent } from "@/lib/api";
 import { AgentCard } from "@/components/agent-card";
 import { CreateAgentDialog } from "@/components/create-agent-dialog";
+import { SettingsDialog } from "@/components/settings-dialog";
 import { Button } from "@/components/ui/button";
-import { Plus, Bot, Loader2 } from "lucide-react";
+import { Plus, Bot, Loader2, Settings } from "lucide-react";
 
 export default function HomePage() {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
   const [editAgent, setEditAgent] = useState<Agent | null>(null);
   const queryClient = useQueryClient();
 
@@ -43,12 +45,17 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Bot className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-bold">Local RAG Agent</h1>
+            <h1 className="text-2xl font-bold">Ragooo</h1>
           </div>
-          <Button onClick={() => { setEditAgent(null); setCreateDialogOpen(true); }}>
-            <Plus className="h-4 w-4 mr-2" />
-            New Agent
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="icon" onClick={() => setSettingsDialogOpen(true)}>
+              <Settings className="h-4 w-4" />
+            </Button>
+            <Button onClick={() => { setEditAgent(null); setCreateDialogOpen(true); }}>
+              <Plus className="h-4 w-4 mr-2" />
+              New Agent
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -95,6 +102,11 @@ export default function HomePage() {
         open={createDialogOpen}
         onOpenChange={setCreateDialogOpen}
         agent={editAgent}
+      />
+
+      <SettingsDialog
+        open={settingsDialogOpen}
+        onOpenChange={setSettingsDialogOpen}
       />
     </div>
   );

@@ -19,8 +19,9 @@ from api.chat import router as chat_router
 from api.models import router as models_router
 from api.conversations import router as conversations_router
 from api.logs import router as logs_router
+from api.settings import router as settings_router
 
-# Create logs directory
+# Create logs directory - triggers reload
 logs_dir = Path(__file__).parent / "logs"
 logs_dir.mkdir(exist_ok=True)
 
@@ -80,7 +81,11 @@ app = FastAPI(
 # CORS middleware for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://frontend:3000",  # Docker internal networking
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -112,6 +117,7 @@ app.include_router(chat_router)
 app.include_router(models_router)
 app.include_router(conversations_router)
 app.include_router(logs_router)
+app.include_router(settings_router)
 
 
 @app.get("/")

@@ -264,3 +264,36 @@ export const modelsApi = {
     return data;
   },
 };
+
+// Settings types
+export interface AppSettings {
+  chunk_size: number;
+  chunk_overlap: number;
+  top_k_results: number;
+  embedding_model: string;
+  default_model: string;
+  openrouter_configured: boolean;
+  google_api_configured: boolean;
+  openrouter_api_key_masked: string;
+  google_api_key_masked: string;
+}
+
+export interface SettingsUpdate {
+  chunk_size?: number;
+  chunk_overlap?: number;
+  top_k_results?: number;
+  openrouter_api_key?: string;
+  google_api_key?: string;
+}
+
+export const settingsApi = {
+  get: async (): Promise<AppSettings> => {
+    const { data } = await api.get("/settings");
+    return data;
+  },
+
+  update: async (settings: SettingsUpdate): Promise<AppSettings> => {
+    const { data } = await api.patch("/settings", settings);
+    return data;
+  },
+};
