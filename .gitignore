@@ -29,6 +29,7 @@ backend/data/
 # Python
 backend/.venv/
 backend/__pycache__/
+backend/.env
 **/__pycache__/
 *.py[cod]
 *$py.class
@@ -44,7 +45,7 @@ backend/logs/*.log
 frontend/node_modules/
 
 # Next.js
-frontend/.next/
+frontend/.next/*
 frontend/out/
 
 # ===========================================
